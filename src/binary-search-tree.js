@@ -28,15 +28,15 @@ class BinarySearchTree {
   add(data) {
     /* throw new NotImplementedError('Not implemented');
        remove line with error and write your code here */
-    const rec = (node) => {
+    const entry = (node) => {
       if (data > node.data) {
-        node.right ? rec(node.right) : (node.right = this.createNode(data));
+        node.right ? entry(node.right) : (node.right = this.createNode(data));
       } else {
-        node.left ? rec(node.left) : (node.left = this.createNode(data));
+        node.left ? entry(node.left) : (node.left = this.createNode(data));
       }
     };
 
-    this.tree ? rec(this.root()) : (this.tree = this.createNode(data));
+    this.tree ? entry(this.root()) : (this.tree = this.createNode(data));
   }
 
   has(data) {
@@ -46,9 +46,40 @@ class BinarySearchTree {
     return false;
   }
 
-  find(/* data */) {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+  find(data) {
+    /* throw new NotImplementedError('Not implemented');
+       remove line with error and write your code here */
+    const entry = (node) => {
+      if (node.data == data) {
+        return node;
+      } else {
+        if (data > node.data) {
+          if (node.right) return entry(node.right);
+        } else {
+          if (node.left) return entry(node.left);
+        }
+      }
+      return null;
+    };
+    return entry(this.root());
+  }
+
+  findPreNode(data) {
+    /* throw new NotImplementedError('Not implemented');
+       remove line with error and write your code here */
+    const entry = (node) => {
+      if (node.left?.data == data || node.right?.data == data) {
+        return node;
+      } else {
+        if (data > node.data) {
+          if (node.right) return entry(node.right);
+        } else {
+          if (node.left) return entry(node.left);
+        }
+      }
+      return null;
+    };
+    return entry(this.root());
   }
 
   remove(/* data */) {
